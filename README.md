@@ -1,7 +1,8 @@
 # SentinelAccess: Secure Remote-Boot Automation
-<video src="presentation.mp4" width="800" controls>
-  Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-</video>
+
+
+https://github.com/user-attachments/assets/c18811db-a979-4425-b97f-be18b0eba30f
+
 *Wersja polska poniżej*
 
 A high-performance Bash automation suite designed for secure, one-click remote access to a HomeLab infrastructure. This project was born out of a personal need to simplify a tedious daily routine of manual VPN connections, SSH hopping, and wake-on-lan triggers.
