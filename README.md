@@ -9,6 +9,14 @@ As a HomeLab owner, managing my setup from remote locations (university, travel)
 - Tailscale (WireGuard): Creates a secure mesh VPN tunnel, removing the need for risky port forwarding.
 - SSH Automation: Executes remote commands on the edge router using Ed25519 key-based authentication.
 - L2 Broadcast: Uses the router as a trusted proxy to broadcast Magic Packets (WoL) within the local Ethernet segment.
+- 
+### Prerequisites & Important Setup Notes
+To make this script work seamlessly, a few manual configurations are required beforehand:
+1. **BIOS/UEFI Configuration:** Wake-on-LAN (WoL) must be explicitly enabled in the target workstation's BIOS and within the OS network adapter settings.
+2. **Tailscale Network:** Both the client device (laptop) and the edge router (ZTE) must be authenticated and active on the same Tailscale tailnet.
+3. **Tailscale Operator Privileges:** To allow the script to bring up Tailscale without `sudo` (which breaks automation), run this command once on your client machine: `sudo tailscale set --operator=$USER`.
+4. **Remmina Profile:** You must manually configure and save a connection profile in Remmina first. Once saved, locate the `.remmina` configuration file (usually in `~/.local/share/remmina/`) and update the `REMMINA_PROFILE` path variable in the script.
+5. **Passwordless SSH:** SSH key-based authentication must be set up between the client and the router so the script can execute `etherwake` without prompting for a password.
 
 ## System Components
 - Automation: Bash scripts with advanced stream redirection (/dev/null) for a clean CLI experience.
@@ -16,6 +24,16 @@ As a HomeLab owner, managing my setup from remote locations (university, travel)
 - VPN: Tailscale for encrypted, peer-to-peer connectivity.
 - Client: Kali Linux (Laptop) and Remmina (RDP/VNC client).
 - Target: Workstation supporting Wake-on-LAN.
+
+### Usage
+1. Make the script executable:
+```bash
+chmod +x sentinel_access.sh
+```
+2. Run the sequence:
+```bash
+./sentinel_access.sh
+```
 
 ---
 
@@ -35,10 +53,27 @@ Jako użytkownik HomeLabu, zarządzanie infrastrukturą z zewnątrz (np. z uczel
 3. Smart Polling: Monitoruje status sieciowy maszyny docelowej do momentu pełnego uruchomienia systemu.
 4. Final Session: Automatycznie uruchamia program Remmina z odpowiednimi parametrami połączenia.
 
+### Wymagania wstępne i ważne kruczki
+Aby skrypt zadziałał poprawnie, konieczne jest wcześniejsze przygotowanie środowiska:
+1. **Konfiguracja BIOS/OS:** Funkcja Wake-on-LAN (WoL) musi być włączona w BIOSie/UEFI komputera docelowego oraz we właściwościach jego karty sieciowej w systemie.
+2. **Sieć VPN:** Zarówno urządzenie klienckie (laptop), jak i router (ZTE) muszą być dodane do tej samej sieci w Tailscale.
+3. **Uprawnienia Tailscale:** Aby skrypt mógł włączać VPN bez proszenia o hasło `sudo`, wykonaj jednorazowo na swoim laptopie polecenie: `sudo tailscale set --operator=$USER`.
+4. **Profil Remmina:** Zanim uruchomisz skrypt, skonfiguruj połączenie bezpośrednio w Remminie i zapisz je. Następnie odszukaj plik konfiguracyjny `.remmina` (zazwyczaj w katalogu `~/.local/share/remmina/`) i zaktualizuj ścieżkę w zmiennej `REMMINA_PROFILE` w skrypcie.
+5. **Klucze SSH:** Wymagane jest skonfigurowanie logowania SSH bez hasła (z użyciem kluczy np. Ed25519) z laptopa na router, aby skrypt nie zacinał się na prośbie o hasło przy wysyłaniu Magic Packet.
+
 ## Technologie
 - Skrypty: Bash (Linux).
 - Router: ZTE MF286D z systemem OpenWrt.
 - VPN: Tailscale (Mesh VPN).
 - Zdalny pulpit: Remmina / RDP.
+### Jak uruchomić?
+1. Nadaj skryptowi uprawnienia do wykonywania:
+```bash
+chmod +x sentinel_access.sh
+```
+2. Odpal skrypt:
+```bash
+./sentinel_access.sh
+```
 
 Projekt stworzony w celu eliminacji powtarzalnych czynności konfiguracyjnych i zabezpieczenia dostępu do domowych zasobów, których używam na co dzień.
