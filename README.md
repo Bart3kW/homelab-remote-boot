@@ -31,11 +31,11 @@ To make this script work seamlessly, a few manual configurations are required be
 ### Usage
 1. Make the script executable:
 ```bash
-chmod +x sentinel_access.sh
+chmod +x start-pc.sh
 ```
 2. Run the sequence:
 ```bash
-./sentinel_access.sh
+./start-pc.sh
 ```
 
 ---
@@ -72,11 +72,11 @@ Aby skrypt zadziałał poprawnie, konieczne jest wcześniejsze przygotowanie śr
 ### Jak uruchomić?
 1. Nadaj skryptowi uprawnienia do wykonywania:
 ```bash
-chmod +x sentinel_access.sh
+chmod +x start-pc.sh
 ```
 2. Odpal skrypt:
 ```bash
-./sentinel_access.sh
+./start-pc.sh
 ```
 
 Projekt stworzony w celu eliminacji powtarzalnych czynności konfiguracyjnych i zabezpieczenia dostępu do domowych zasobów, których używam na co dzień.
